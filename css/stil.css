@@ -1,0 +1,20 @@
+h1 {
+    font-size: 30px;
+    font-family: 'Courier New', Courier, monospace;
+    color:brown;
+}
+.div {
+    background-color: beige;
+}
+table {
+    background-color: blanchedalmond;
+}
+.kontakt {
+    background-color: chocolate;
+    color: beige;
+    margin: 10px;
+    padding: 10px;
+}
+a:active {
+    color: blue;
+}

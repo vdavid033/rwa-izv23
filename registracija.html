@@ -1,0 +1,92 @@
+<?php
+  session_start();
+?>
+<!DOCTYPE html>
+<html lang="en">
+<!--Registracija
+Korisnik unosi:
+    korisničko ime
+    e-mail
+    lozinku
+Klikne na Potvrdi
+Kreirati funkciju naziva registracija()
+U jednom div elementu mu se ispisuje:
+"Registrirali ste se s korisničkim imenom ... 
+Potvrdu ćete dobiti na e-mail ..."
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Videoteka</title>
+    <!--link rel="stylesheet" href="./css/stil.css"-->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script>
+        function posalji(){
+            const username =document.getElementById("username").value;
+            //alert(tekst);
+            const email=document.getElementById("email").value;
+            const password=document.getElementById("password").value;
+            const password1=document.getElementById("password1").value;
+
+            const httpRequest = new XMLHttpRequest();
+            httpRequest.onreadystatechange =function(){
+                if (httpRequest.readyState < 4){
+                    document.getElementById("ispis").innerHTML ="Čekam odgovor";
+                }
+                if (httpRequest.readyState == 4){
+                    let response = httpRequest.responseText;
+                    document.getElementById("ispis").innerHTML =
+                        "<div class='w3-container'>Poruka: "+response+"</div>"; 
+                }
+            }
+            httpRequest.open("GET", "http://127.0.0.1/RWA/kontakt_msg.php?email="+
+                email+"&tekst="+tekst);
+            httpRequest.send();
+        }
+    </script>
+</head>
+
+<body>
+    <div class="w3-bar w3-black">
+        
+        <h1><img src="pngwing.com.png" alt="" width="100">Videoteka</h1>
+        <a href="index.html" class="w3-bar-item w3-button w3-round w3-grey">Početna</a>
+        <a href="filmovi.html" class="w3-bar-item w3-button w3-round">Popis filmova</a>
+        <a href="rezervacija_filmova.php" class="w3-bar-item w3-button w3-round">Rezervacija filmova</a>        
+        <a href="kontakt.html" class="w3-bar-item w3-button w3-round">Kontakt</a>
+    </div>
+
+    <div class="w3-container">
+        <h2>Registracija</h2>
+      <div class="w3-card w3-half">
+            <div class="w3-container w3-teal">
+                <h2 class="w3-opacity"><b>Registracija</b></h2>
+            </div>
+            <div class="w3-container w3-grey">
+              
+                <label for="">Unesite korisničko ime:</label>
+                <input type="text" name="" id="username" class="w3-input w3-border w3-round">
+
+                <label for="">Unesite e-mail adresu:</label>
+                <input type="email" name="" id="email" class="w3-input w3-border w3-round">
+
+                <label for="">Unesite lozinku:</label>
+                <input type="password" name="" id="password" class="w3-input w3-border w3-round">
+                
+                <label for="">Ponovite lozinku:</label>
+                <input type="password" name="" id="password1" class="w3-input w3-border w3-round">
+
+                <input type="submit" value="Pošalji" class="w3-btn w3-black" onclick="posalji()">
+
+
+            </div>
+        </div>       
+    </div>
+    <div class="w3-container">
+        <div class=" w3-card w3-half" id="ispis"></div>
+    </div>
+    
+
+</body>
+
+</html>

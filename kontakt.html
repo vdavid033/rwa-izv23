@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Videoteka</title>
+    <!--link rel="stylesheet" href="./css/stil.css"-->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script>
+        function procitajTekst(){
+            const tekst =document.getElementById("tekst").value;
+            //alert(tekst);
+            const email=document.getElementById("email").value;
+
+            const httpRequest = new XMLHttpRequest();
+            httpRequest.onreadystatechange =function(){
+                if (httpRequest.readyState < 4){
+                    document.getElementById("ispis").innerHTML ="Čekam odgovor";
+                }
+                if (httpRequest.readyState == 4){
+                    let response = httpRequest.responseText;
+                    document.getElementById("ispis").innerHTML =
+                        "<div class='w3-container'>Poruka: "+response+"</div>"; 
+                }
+            }
+            httpRequest.open("GET", "http://127.0.0.1/RWA/kontakt_msg.php?email="+
+                email+"&tekst="+tekst);
+            httpRequest.send();
+        }
+    </script>
+</head>
+
+<body>
+    <div class="w3-bar w3-black">
+        
+        <h1><img src="pngwing.com.png" alt="" width="100">Videoteka</h1>
+        <a href="index.html" class="w3-bar-item w3-button w3-round w3-grey">Početna</a>
+        <a href="filmovi.html" class="w3-bar-item w3-button w3-round">Popis filmova</a>
+        <a href="rezervacija_filmova.php" class="w3-bar-item w3-button w3-round">Rezervacija filmova</a>        
+        <a href="kontakt.html" class="w3-bar-item w3-button w3-round">Kontakt</a>
+    </div>
+
+    <div class="w3-container">
+        <h2>Kontakt</h2>
+        <div>Možete nas kontaktirati na: 051 111 222</div>
+        <div id="porukaKontakt">Ili pošaljite poruku, kontaktirat ćemo Vas na navedenu adresu</div>
+        <div class="w3-card w3-half">
+            <div class="w3-container w3-teal">
+                <h2 class="w3-opacity"><b>Unesite poruku</b></h2>
+            </div>
+            <div class="w3-container w3-grey">
+              
+
+                <label for="">Unesite e-mail adresu:</label>
+                <input type="email" name="" id="email" class="w3-input w3-border w3-round">
+
+                <label for="">Unesite sadržaj:</label>
+                <textarea name="message" id="tekst" cols="30" rows="10" class="w3-input w3-border w3-round"></textarea>
+
+                <input type="submit" value="Pošalji" class="w3-btn w3-black" onclick="procitajTekst()">
+
+
+            </div>
+        </div>       
+    </div>
+    <div class="w3-container">
+        <div class=" w3-card w3-half" id="ispis"></div>
+    </div>
+    
+    <script>
+        document.write("<h4 class='w3-container w3-black'>JavaScript</h4>");
+        document.getElementById("porukaKontakt").classList.add("w3-text-teal"); //style.backgroundColor="pink";
+    </script>
+</body>
+
+</html>
